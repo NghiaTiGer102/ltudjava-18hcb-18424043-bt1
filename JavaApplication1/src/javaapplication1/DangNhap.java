@@ -113,7 +113,7 @@ public class DangNhap extends javax.swing.JFrame {
         System.out.println(txtTaiKhoan.getText().toLowerCase());
         if(txtTaiKhoan.getText().toLowerCase().equalsIgnoreCase("giaovu"))
         {
-            currentDirectory+="\\Data\\GiaoVu.txt";
+            currentDirectory+="\\Data\\TaiKhoan\\GiaoVu.txt";
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
@@ -165,7 +165,7 @@ public class DangNhap extends javax.swing.JFrame {
         }
         else
         {
-              currentDirectory+="\\Data\\TaiKhoan.txt";
+              currentDirectory+="\\Data\\TaiKhoan\\TaiKhoan.txt";
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
