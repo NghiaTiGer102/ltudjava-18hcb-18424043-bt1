@@ -5,11 +5,13 @@
  */
 package javaapplication1;
 
+import com.sun.org.apache.xerces.internal.impl.dtd.models.CMBinOp;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.awt.print.Book;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,10 +19,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplication1.Entities.SinhVien;
+import javaapplication1.Entities.TaiKhoan;
+import javaapplication1.Extension.TxtFileNameFilter;
+import javax.swing.JOptionPane;
 
 
 
@@ -47,8 +53,23 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     private void initComponents() {
 
         btnInportCSV = new javax.swing.JButton();
+        txtCMND = new javax.swing.JTextField();
+        txtGioiTinh = new javax.swing.JTextField();
+        txtMSSV = new javax.swing.JTextField();
+        txtHoTen = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        btnThem = new javax.swing.JButton();
+        cmbDanhSachLopHoc = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnInportCSV.setText("Import CSV");
         btnInportCSV.addActionListener(new java.awt.event.ActionListener() {
@@ -57,21 +78,75 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("MSSV");
+
+        jLabel2.setText("Họ và tên");
+
+        jLabel3.setText("Giới tính");
+
+        jLabel5.setText("CMND");
+
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(273, Short.MAX_VALUE)
-                .addComponent(btnInportCSV)
-                .addGap(28, 28, 28))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThem)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(115, 115, 115)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCMND)
+                                    .addComponent(txtGioiTinh)
+                                    .addComponent(txtHoTen)
+                                    .addComponent(txtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(50, 50, 50)
+                                .addComponent(btnInportCSV))
+                            .addComponent(cmbDanhSachLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(229, Short.MAX_VALUE)
-                .addComponent(btnInportCSV)
-                .addGap(46, 46, 46))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnInportCSV)))
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addComponent(cmbDanhSachLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(btnThem)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pack();
@@ -165,6 +240,113 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnInportCSVActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        HienThiDanhSachLopLenCombobox();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        
+         List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
+        File file = new File("");
+        String currentDirectory = file.getAbsolutePath();
+        currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + cmbDanhSachLopHoc.getSelectedItem().toString()+".txt";
+        System.out.println("Current working directory : " + currentDirectory);
+  BufferedReader br = null;
+              try {   
+            br = new BufferedReader(new FileReader(currentDirectory));       
+
+            System.out.println("Đọc nội dung file sử dụng phương thức readLine()");
+
+            String textInALine;
+           
+         
+            
+            while ((textInALine = br.readLine()) != null) {           
+                
+               
+                
+                String[] sinhVienTemp = textInALine.split("\\|");
+                
+               SinhVien sv = new SinhVien(sinhVienTemp[0],sinhVienTemp[1],sinhVienTemp[2],sinhVienTemp[3]);
+                
+               listSinhVien.add(sv);            
+            }
+            
+           SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtGioiTinh.getText(),txtCMND.getText());
+           
+           listSinhVien.add(sv);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                }
+              
+              
+              
+              try {
+      File fileghi = new File("");
+        
+        
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f);
+     //Bước 2: Ghi dữ liệu
+     
+    listSinhVien.forEach((element) -> {
+        String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
+          try {
+              fw.write(dulieusinhvien);
+          } catch (IOException ex) {
+              Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        });
+
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+        
+        
+        
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    public boolean accept(File dir, String name) {
+ 
+        if (name.endsWith(".txt")) {
+            return true;
+        }
+ 
+        return false;
+    }
+    
+     void  HienThiDanhSachLopLenCombobox()
+    {
+        
+         File fileghi = new File("");
+        String currentDirectory = fileghi.getAbsolutePath();
+        currentDirectory +="\\Data\\Dulieu\\DanhSachSinhVien";
+        File dir = new File(currentDirectory);
+ 
+        File[] txtFiles = dir.listFiles(new TxtFileNameFilter());
+ 
+        for (File txtFile : txtFiles) {
+             File f = new File(txtFile.getAbsolutePath());
+             
+            cmbDanhSachLopHoc.addItem(f.getName().toString().replace(".txt", ""));
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -196,11 +378,28 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new formDanhSachSinhVien().setVisible(true);
+                
             }
+            
+            
+            
+            
+            
+            
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInportCSV;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JComboBox<String> cmbDanhSachLopHoc;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtCMND;
+    private javax.swing.JTextField txtGioiTinh;
+    private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtMSSV;
     // End of variables declaration//GEN-END:variables
 }
