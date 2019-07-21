@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 import javaapplication1.Entities.MonHoc;
 import javaapplication1.Entities.SinhVien;
 import javaapplication1.Extension.TxtFileNameFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -47,6 +49,9 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
 
         btnImportCSV = new javax.swing.JButton();
         cmbLopHoc = new javax.swing.JComboBox<>();
+        scrollPane1 = new java.awt.ScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbThoiKhoaBieu = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -62,30 +67,122 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
             }
         });
 
+        cmbLopHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLopHocActionPerformed(evt);
+            }
+        });
+
+        tbThoiKhoaBieu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tbThoiKhoaBieu);
+
+        scrollPane1.add(jScrollPane1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(cmbLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnImportCSV)
                 .addContainerGap())
+            .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(cmbLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnImportCSV)
-                    .addComponent(cmbLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(cmbLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(btnImportCSV)
+                .addGap(18, 18, 18)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng học" };
 
+    void LoadDuLieuMonHoc(String[] columnNames,String lophoc)
+    {
+         File file = new File("");
+        String currentDirectory = file.getAbsolutePath();
+          
+        currentDirectory +="\\Data\\DuLieu\\DanhSachThoiKhoaBieu\\" + lophoc+".txt";
+        Path pathToFile = Paths.get(currentDirectory);
+        
+         List<MonHoc> listMonHoc = new ArrayList<MonHoc>();
+        
+        String tenKhoaBieu="";
+        // create an instance of BufferedReader
+        // using try with resource, Java 7 feature to close resources
+        
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
+        {
+
+            // read the first line from the text file
+            String line = br.readLine();                                         
+            while (line != null) 
+            {              
+                
+                // use string.split to load a string array with the values from
+                // each line of
+                // the file, using a comma as the delimiter
+                String[] attributes = line.split("\\|");
+                MonHoc monhoc = new MonHoc();
+                 monhoc = monhoc.ThemMonHoc(attributes);
+
+                // adding book into ArrayList
+                listMonHoc.add(monhoc);
+
+                // read next line before looping
+                // if end of file reached, line would be null
+                line = br.readLine();
+            }
+            
+            
+            // loop until all lines are read
+            
+            br.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            
+        }
+        
+        
+        String[][] listDataMonHoc = new String[listMonHoc.size()][5];
+        for(int i =0;i<listMonHoc.size();i++)
+        {
+              listDataMonHoc[i][0] = (i+1) + "";
+              listDataMonHoc[i][1] =  listMonHoc.get(i).getMaMonHoc();
+              listDataMonHoc[i][2] =  listMonHoc.get(i).getTenMonHoc();
+              listDataMonHoc[i][3] =  listMonHoc.get(i).getPhongHoc();
+             
+        }
+        
+        
+        
+        TableModel tablemodel = new DefaultTableModel(listDataMonHoc, columnNames);
+        tbThoiKhoaBieu.setModel(tablemodel);
+        
+    
+    }
+    
+    
     private void btnImportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportCSVActionPerformed
         // TODO add your handling code here:
         FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");        
@@ -155,8 +252,10 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
      File f = new File(currentDirectory);
      FileWriter fw = new FileWriter(f);
      //Bước 2: Ghi dữ liệu
-     String khoaBieuLop = cmbLopHoc.getSelectedItem().toString() +"|"+ tenKhoaBieu+"\n";
-      fw.write(khoaBieuLop);
+     
+     //String khoaBieuLop = cmbLopHoc.getSelectedItem().toString() +"|"+ tenKhoaBieu+"\n";
+     // fw.write(khoaBieuLop);
+     
     listMonHoc.forEach((element) -> {
         String dulieumonhoc = element.getMaMonHoc()+"|"+element.getTenMonHoc()+"|"+element.getPhongHoc()+"\n";
           try {
@@ -219,7 +318,13 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         HienThiDanhSachLopLenCombobox();
+        LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
     }//GEN-LAST:event_formWindowOpened
+
+    private void cmbLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLopHocActionPerformed
+        // TODO add your handling code here:
+         LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+    }//GEN-LAST:event_cmbLopHocActionPerformed
 
     
     
@@ -277,5 +382,8 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnImportCSV;
     private javax.swing.JComboBox<String> cmbLopHoc;
+    private javax.swing.JScrollPane jScrollPane1;
+    private java.awt.ScrollPane scrollPane1;
+    private javax.swing.JTable tbThoiKhoaBieu;
     // End of variables declaration//GEN-END:variables
 }

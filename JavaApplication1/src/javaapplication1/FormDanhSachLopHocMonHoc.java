@@ -7,6 +7,8 @@ package javaapplication1;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -14,6 +16,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javaapplication1.Entities.SinhVien;
 import javaapplication1.Extension.TxtFileNameFilter;
 import javax.swing.table.DefaultTableModel;
@@ -44,10 +48,10 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
     private void initComponents() {
 
         cmdLopMonHoc = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtMSSV = new javax.swing.JTextField();
+        txtHoTen = new javax.swing.JTextField();
+        txtGioiTinh = new javax.swing.JTextField();
+        txtCMND = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,6 +59,8 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         scrollPane1 = new java.awt.ScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbSinhVienMonHoc = new javax.swing.JTable();
+        btnThem = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -88,15 +94,34 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbSinhVienMonHoc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbSinhVienMonHocMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbSinhVienMonHoc);
 
         scrollPane1.add(jScrollPane1);
+
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
+
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
@@ -104,14 +129,20 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdLopMonHoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField1)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField3)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtMSSV)
+                    .addComponent(txtHoTen)
+                    .addComponent(txtGioiTinh)
+                    .addComponent(txtCMND, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
                 .addGap(164, 164, 164))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(cmdLopMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btnThem, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -119,7 +150,7 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -127,19 +158,22 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(cmdLopMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdLopMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnThem)
+                    .addComponent(btnXoa))
+                .addGap(41, 41, 41)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,6 +198,8 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
                
                String[] attributes = line.split("\\|");
                 SinhVien sv = new SinhVien();
+                if(sv.getcMND()=="")
+                    continue;
                  sv = sv.ThemSinhVien(attributes);
                 // adding book into ArrayList
                 listSinhVien.add(sv);
@@ -232,6 +268,187 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
     }//GEN-LAST:event_cmdLopMonHocActionPerformed
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        
+         List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
+        File file = new File("");
+        String currentDirectory = file.getAbsolutePath();
+        currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmdLopMonHoc.getSelectedItem().toString()+".txt";
+        System.out.println("Current working directory : " + currentDirectory);
+  BufferedReader br = null;
+              try {   
+            br = new BufferedReader(new FileReader(currentDirectory));       
+
+            System.out.println("Đọc nội dung file sử dụng phương thức readLine()");
+
+            String textInALine;
+           
+         
+            
+            while ((textInALine = br.readLine()) != null) {           
+                
+               
+                
+                String[] sinhVienTemp = textInALine.split("\\|");
+                
+               SinhVien sv = new SinhVien(sinhVienTemp[0],sinhVienTemp[1],sinhVienTemp[2],sinhVienTemp[3]);
+                
+               listSinhVien.add(sv);            
+            }
+            
+           SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtHoTen.getText(),txtCMND.getText());
+           
+           listSinhVien.add(sv);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                }
+              
+              
+              
+              try {
+      File fileghi = new File("");
+        
+        
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f);
+     //Bước 2: Ghi dữ liệu
+     
+    listSinhVien.forEach((element) -> {
+        String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
+          try {
+              fw.write(dulieusinhvien);
+          } catch (IOException ex) {
+              Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        });
+
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+        
+        LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        
+        int check = tbSinhVienMonHoc.getSelectedRowCount();
+        
+        if(check==0)
+        {
+            return;
+        }
+        
+         List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
+        File file = new File("");
+        String currentDirectory = file.getAbsolutePath();
+        currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmdLopMonHoc.getSelectedItem().toString()+".txt";
+        System.out.println("Current working directory : " + currentDirectory);
+  BufferedReader br = null;
+              try {   
+            br = new BufferedReader(new FileReader(currentDirectory));       
+
+            System.out.println("Đọc nội dung file sử dụng phương thức readLine()");
+
+            String textInALine;
+           
+         
+            
+            while ((textInALine = br.readLine()) != null) {           
+                
+               
+                
+                String[] sinhVienTemp = textInALine.split("\\|");
+                
+               SinhVien sv = new SinhVien(sinhVienTemp[0],sinhVienTemp[1],sinhVienTemp[2],sinhVienTemp[3]);
+                
+               listSinhVien.add(sv);            
+            }
+            
+           SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtHoTen.getText(),txtCMND.getText());
+           
+           listSinhVien.add(sv);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                }
+              
+              
+              
+              try {
+      File fileghi = new File("");
+        
+        
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f);
+     //Bước 2: Ghi dữ liệu
+    
+     
+     for(int i=0;i<listSinhVien.size();i++)
+     {
+      if(listSinhVien.get(i).getmSSV().equals(tbSinhVienMonHoc.getValueAt(tbSinhVienMonHoc.getSelectedRow(), 1).toString()))
+      {
+          listSinhVien.remove(i);
+          break;
+      }
+     }
+     
+     
+     for(int i=0;i<listSinhVien.size();i++)
+     {
+         if(listSinhVien.get(i).getmSSV().equals(""))
+         {
+             continue;
+         }
+         String dulieusinhvien = listSinhVien.get(i).getmSSV()+"|"+listSinhVien.get(i).getHoTen()+"|"+listSinhVien.get(i).getGioiTinh()+"|"+listSinhVien.get(i).getcMND()+"\n";
+            try {
+                fw.write(dulieusinhvien);
+            } catch (IOException ex) {
+                Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+            }
+              
+     }
+     
+    
+
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+        
+        LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void tbSinhVienMonHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSinhVienMonHocMouseClicked
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_tbSinhVienMonHocMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -268,17 +485,19 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cmdLopMonHoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private java.awt.ScrollPane scrollPane1;
     private javax.swing.JTable tbSinhVienMonHoc;
+    private javax.swing.JTextField txtCMND;
+    private javax.swing.JTextField txtGioiTinh;
+    private javax.swing.JTextField txtHoTen;
+    private javax.swing.JTextField txtMSSV;
     // End of variables declaration//GEN-END:variables
 }
