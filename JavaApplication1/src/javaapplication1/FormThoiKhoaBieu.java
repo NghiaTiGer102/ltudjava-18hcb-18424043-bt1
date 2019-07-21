@@ -90,14 +90,14 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
         // TODO add your handling code here:
         FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");        
          dialog.setFile("*.CSV");
-      
-    dialog.setMode(FileDialog.LOAD);
-    dialog.setVisible(true);
-    String file = dialog.getFile();
-    System.out.println(file + " chosen.");
-     System.out.println(dialog.getDirectory() + " chosen.");
-     
-     String fileCSV = dialog.getDirectory()+file;
+
+        dialog.setMode(FileDialog.LOAD);
+        dialog.setVisible(true);
+        String file = dialog.getFile();
+        System.out.println(file + " chosen.");
+         System.out.println(dialog.getDirectory() + " chosen.");
+
+         String fileCSV = dialog.getDirectory()+file;
      
 
      
@@ -174,6 +174,43 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
      System.out.println("Loi ghi file: " + ex);
      
     }
+         
+         
+         
+         
+       // Ghi danh sách sinh viên vào lớp hcọ
+       
+       List<SinhVien> listSinhVien = new  ArrayList<SinhVien>();
+       SinhVien sv = new SinhVien();
+       listSinhVien = sv.getAllSinhVien(cmbLopHoc.getSelectedItem().toString());
+       
+       
+        try {
+      File fileghi = new File("");
+        String currentDirectory = fileghi.getAbsolutePath();
+        currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmbLopHoc.getSelectedItem().toString()+"-"+tenKhoaBieu+".txt";
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f);
+     //Bước 2: Ghi dữ liệu
+     
+    listSinhVien.forEach((element) -> {
+        String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
+          try {
+              fw.write(dulieusinhvien);
+          } catch (IOException ex) {
+              Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        });
+
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+         
         
          
         
