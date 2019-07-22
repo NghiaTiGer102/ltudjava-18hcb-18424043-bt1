@@ -30,6 +30,9 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
     private void initComponents() {
 
         btnDanhSachSinhVien = new javax.swing.JButton();
+        btnDanhSachMonHoc = new javax.swing.JButton();
+        btnDanhSachThoiKhoaBieu = new javax.swing.JButton();
+        btnDanhSachDiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -45,21 +48,58 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
             }
         });
 
+        btnDanhSachMonHoc.setText("Danh sách lớp môn học");
+        btnDanhSachMonHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDanhSachMonHocActionPerformed(evt);
+            }
+        });
+
+        btnDanhSachThoiKhoaBieu.setText("Danh sach thời khóa biểu");
+        btnDanhSachThoiKhoaBieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDanhSachThoiKhoaBieuActionPerformed(evt);
+            }
+        });
+
+        btnDanhSachDiem.setText("Danh sách điểm");
+        btnDanhSachDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDanhSachDiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(btnDanhSachSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDanhSachSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDanhSachThoiKhoaBieu))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnDanhSachMonHoc, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(btnDanhSachDiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnDanhSachSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDanhSachSinhVien, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDanhSachMonHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addComponent(btnDanhSachDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(154, 154, 154))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(btnDanhSachThoiKhoaBieu, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -67,6 +107,8 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
 
     private void btnDanhSachSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachSinhVienActionPerformed
         // TODO add your handling code here:
+        FormDanhSachDiemSinhVien frm = new FormDanhSachDiemSinhVien();
+        frm.setVisible(true);
     }//GEN-LAST:event_btnDanhSachSinhVienActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -90,6 +132,24 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnDanhSachThoiKhoaBieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachThoiKhoaBieuActionPerformed
+        // TODO add your handling code here:
+        FormThoiKhoaBieu frm = new FormThoiKhoaBieu();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnDanhSachThoiKhoaBieuActionPerformed
+
+    private void btnDanhSachMonHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachMonHocActionPerformed
+        // TODO add your handling code here:
+        FormDanhSachLopHocMonHoc frm = new FormDanhSachLopHocMonHoc();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnDanhSachMonHocActionPerformed
+
+    private void btnDanhSachDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachDiemActionPerformed
+        // TODO add your handling code here:
+        FormDanhSachDiemSinhVien frm  = new FormDanhSachDiemSinhVien();
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnDanhSachDiemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,6 +187,9 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDanhSachDiem;
+    private javax.swing.JButton btnDanhSachMonHoc;
     private javax.swing.JButton btnDanhSachSinhVien;
+    private javax.swing.JButton btnDanhSachThoiKhoaBieu;
     // End of variables declaration//GEN-END:variables
 }

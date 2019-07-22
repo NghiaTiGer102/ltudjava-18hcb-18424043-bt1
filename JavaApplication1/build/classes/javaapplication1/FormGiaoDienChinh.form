@@ -26,19 +26,41 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="btnDanhSachSinhVien" min="-2" pref="152" max="-2" attributes="0"/>
-              <EmptySpace pref="219" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnDanhSachSinhVien" min="-2" pref="175" max="-2" attributes="0"/>
+                  <Component id="btnDanhSachThoiKhoaBieu" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="120" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnDanhSachMonHoc" pref="188" max="32767" attributes="0"/>
+                  <Component id="btnDanhSachDiem" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="btnDanhSachSinhVien" min="-2" pref="77" max="-2" attributes="0"/>
-              <EmptySpace pref="191" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnDanhSachSinhVien" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="btnDanhSachMonHoc" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace pref="123" max="32767" attributes="0"/>
+                      <Component id="btnDanhSachDiem" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                      <Component id="btnDanhSachThoiKhoaBieu" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,6 +72,30 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDanhSachSinhVienActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDanhSachMonHoc">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch l&#x1edb;p m&#xf4;n h&#x1ecd;c"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDanhSachMonHocActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDanhSachThoiKhoaBieu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Danh sach th&#x1edd;i kh&#xf3;a bi&#x1ec3;u"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDanhSachThoiKhoaBieuActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDanhSachDiem">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Danh s&#xe1;ch &#x111;i&#x1ec3;m"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDanhSachDiemActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

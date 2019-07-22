@@ -39,21 +39,19 @@
                       </Group>
                       <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtCMND" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtGioiTinh" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtHoTen" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtMSSV" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="btnInportCSV" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtCMND" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtGioiTinh" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtHoTen" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtMSSV" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
                           </Group>
                           <Component id="cmbDanhSachLopHoc" min="-2" pref="124" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnInportCSV" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <Component id="scrollPane2" max="32767" attributes="0"/>
@@ -74,7 +72,7 @@
                   <Component id="txtHoTen" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -82,10 +80,7 @@
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCMND" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnInportCSV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="txtCMND" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -93,9 +88,10 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnThem" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmbDanhSachLopHoc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnInportCSV" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-              <Component id="scrollPane2" pref="235" max="32767" attributes="0"/>
+              <Component id="scrollPane2" pref="236" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
