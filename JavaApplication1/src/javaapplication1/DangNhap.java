@@ -94,7 +94,7 @@ public class DangNhap extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    public static  String  user = "";
 
     
     
@@ -113,6 +113,7 @@ public class DangNhap extends javax.swing.JFrame {
         System.out.println(txtTaiKhoan.getText().toLowerCase());
         if(txtTaiKhoan.getText().toLowerCase().equalsIgnoreCase("giaovu"))
         {
+            user = "giaovu";
             currentDirectory+="\\Data\\TaiKhoan\\GiaoVu.txt";
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
@@ -186,9 +187,11 @@ public class DangNhap extends javax.swing.JFrame {
             
             if(listTaiKhoan.size()>0)
             {
+                
                 TaiKhoan taiKhoan = new TaiKhoan();
                 taiKhoan.setTaiKhoan(txtTaiKhoan.getText());
                 taiKhoan.setMatKhau(txtMatKhau.getText().toString());
+                user = txtTaiKhoan.getText();
                 if(listTaiKhoan.stream().filter(o -> o.getTaiKhoan().equals(taiKhoan.getTaiKhoan()) &&o.getMatKhau().equals(taiKhoan.getMatKhau())).findFirst().isPresent())
                 {
                     JOptionPane.showMessageDialog(null, "Đăng nhập thành công","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
