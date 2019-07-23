@@ -45,6 +45,7 @@ public class DangNhap extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jButton1.setBackground(new java.awt.Color(0, 102, 255));
         jButton1.setText("Đăng nhập");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,7 +53,6 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
-        txtTaiKhoan.setText("giaovu");
         txtTaiKhoan.setName("txtTaiKhoan"); // NOI18N
 
         jLabel1.setText("Mật khẩu");
@@ -195,7 +195,7 @@ public class DangNhap extends javax.swing.JFrame {
                 if(listTaiKhoan.stream().filter(o -> o.getTaiKhoan().equals(taiKhoan.getTaiKhoan()) &&o.getMatKhau().equals(taiKhoan.getMatKhau())).findFirst().isPresent())
                 {
                     JOptionPane.showMessageDialog(null, "Đăng nhập thành công","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
-                    FormGiaoDienChinh frm = new FormGiaoDienChinh();
+                    FormDiemSinhVien frm = new FormDiemSinhVien();
                     frm.setVisible(true);
                     this.dispose();
                 } 

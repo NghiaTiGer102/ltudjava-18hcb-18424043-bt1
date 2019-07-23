@@ -122,7 +122,7 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
 
     private void btnDanhSachSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDanhSachSinhVienActionPerformed
         // TODO add your handling code here:
-        FormDanhSachDiemSinhVien frm = new FormDanhSachDiemSinhVien();
+        formDanhSachSinhVien frm = new formDanhSachSinhVien();
         frm.setVisible(true);
     }//GEN-LAST:event_btnDanhSachSinhVienActionPerformed
 

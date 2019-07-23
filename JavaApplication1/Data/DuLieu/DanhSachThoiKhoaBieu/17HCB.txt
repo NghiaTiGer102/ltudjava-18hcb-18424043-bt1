@@ -1,2 +1,2 @@
-CTT011|Nghia|C321
-CTT012|asdas|C321
+﻿CTT001|Java|C31
+CTT002|Mạng máy tính|C31

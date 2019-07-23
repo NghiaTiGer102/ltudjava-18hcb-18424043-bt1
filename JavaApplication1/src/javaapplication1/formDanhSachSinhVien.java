@@ -199,6 +199,12 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
      
      String  lopHoc = "";
      
+      File ff = new File(fileCSV);
+        if(!ff.exists())
+        {
+            return;
+        }
+     
       List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
         Path pathToFile = Paths.get(fileCSV);
 
@@ -252,6 +258,33 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
      
     listSinhVien.forEach((element) -> {
         String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
+          try {
+              fw.write(dulieusinhvien);
+          } catch (IOException ex) {
+              Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        });
+
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+         
+         
+          try {
+      File fileghi = new File("");
+        String currentDirectory = fileghi.getAbsolutePath();
+        currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f,true);
+     //Bước 2: Ghi dữ liệu
+     
+    listSinhVien.forEach((element) -> {
+        String dulieusinhvien = element.getmSSV()+"|"+element.getmSSV()+"\n";
           try {
               fw.write(dulieusinhvien);
           } catch (IOException ex) {
@@ -332,16 +365,8 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         
-        HienThiDanhSachLopLenCombobox();
-        
-       
-        
-        
-              
-        
-        LoadDuLieuSinHVien(columnNames,cmbDanhSachLopHoc.getSelectedItem().toString());
-       
-            
+        HienThiDanhSachLopLenCombobox();                       
+        LoadDuLieuSinHVien(columnNames,cmbDanhSachLopHoc.getSelectedItem().toString());                 
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -407,6 +432,33 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
         });
+  
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+              
+              
+               try {
+      File fileghi = new File("");
+         currentDirectory = fileghi.getAbsolutePath();
+        currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f,true);
+     //Bước 2: Ghi dữ liệu
+     
+    
+        String dulieusinhvien = txtMSSV.getText()+"|"+txtMSSV.getText()+"\n";
+          try {
+              fw.write(dulieusinhvien);
+          } catch (IOException ex) {
+              Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      
 
     
     

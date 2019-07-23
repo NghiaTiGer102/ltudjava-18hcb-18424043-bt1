@@ -180,24 +180,16 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
     
     }
     
-    
-    private void btnImportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportCSVActionPerformed
-        // TODO add your handling code here:
-        FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");        
-         dialog.setFile("*.CSV");
-
-        dialog.setMode(FileDialog.LOAD);
-        dialog.setVisible(true);
-        String file = dialog.getFile();
-        System.out.println(file + " chosen.");
-         System.out.println(dialog.getDirectory() + " chosen.");
-
-         String fileCSV = dialog.getDirectory()+file;
-     
-
-     
-      List<MonHoc> listMonHoc = new ArrayList<MonHoc>();
-        Path pathToFile = Paths.get(fileCSV);
+    List<MonHoc> GhiDanhSachMonHoc()
+    {
+        File file = new File("");
+        String currentDirectory = file.getAbsolutePath();
+          
+        currentDirectory +="\\Data\\DuLieu\\DanhSachMonHoc\\"+"MonHoc.txt";
+        Path pathToFile = Paths.get(currentDirectory);
+        
+         List<MonHoc> listMonHoc = new ArrayList<MonHoc>();
+        
         String tenKhoaBieu="";
         // create an instance of BufferedReader
         // using try with resource, Java 7 feature to close resources
@@ -208,21 +200,18 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
             // read the first line from the text file
             String line = br.readLine();                                         
             while (line != null) 
-            {
-                
-                if(tenKhoaBieu  == "")
-                {
-                String[] attributes = line.split("\\,");
-                tenKhoaBieu = attributes[0];
-                 line = br.readLine();
-                 continue;
-                }
+            {              
                 
                 // use string.split to load a string array with the values from
                 // each line of
                 // the file, using a comma as the delimiter
-                String[] attributes = line.split(",");
+                String[] attributes = line.split("\\|");
+                if(attributes.length<2)
+                {
+                    return null;
+                }
                 MonHoc monhoc = new MonHoc();
+                monhoc.setPhongHoc(0+"");
                  monhoc = monhoc.ThemMonHoc(attributes);
 
                 // adding book into ArrayList
@@ -242,17 +231,120 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
             
         }
         
-         try {
+        return listMonHoc;
+        
+        
+        
+    }
+    
+    
+    private void btnImportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportCSVActionPerformed
+        // TODO add your handling code here:
+        FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");        
+         dialog.setFile("*.CSV");
+
+        dialog.setMode(FileDialog.LOAD);
+        dialog.setVisible(true);
+        String file = dialog.getFile();
+        System.out.println(file + " chosen.");
+         System.out.println(dialog.getDirectory() + " chosen.");
+
+         String fileCSV = dialog.getDirectory()+file;
+     File ff = new File(fileCSV);
+        if(!ff.exists())
+        {
+            return;
+        }
+
+     
+      List<MonHoc> listMonHoc = new ArrayList<MonHoc>();
+        Path pathToFile = Paths.get(fileCSV);
+       
+        // create an instance of BufferedReader
+        // using try with resource, Java 7 feature to close resources
+        
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
+        {
+
+            // read the first line from the text file
+            String line = br.readLine();                                         
+            while (line != null) 
+            {
+                
+                
+                
+                // use string.split to load a string array with the values from
+                // each line of
+                // the file, using a comma as the delimiter
+                String[] attributes = line.split(",");
+                MonHoc monhoc = new MonHoc();
+                 monhoc = monhoc.ThemMonHoc(attributes);
+
+                // adding book into ArrayList
+                listMonHoc.add(monhoc);
+
+                // read next line before looping
+                // if end of file reached, line would be null
+               line = br.readLine();
+            }
+            
+            
+            // loop until all lines are read
+            
+            br.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            
+        }
+        
+         
+         
+         
+        //Luu danh sach mon hoc nếu không có thì thêm vào file
+         List<MonHoc> listMonHocs = GhiDanhSachMonHoc();
+ 
+        List<MonHoc> listMonHocGhi = new ArrayList<MonHoc>();
+        if(listMonHocs.size()>0)
+        {
+           
+            
+            for(MonHoc mh:listMonHoc)
+            {
+                 int ktMonhoc =1;                
+                for(MonHoc mhs :listMonHocs)
+                {
+                    String mS= mh.getTenMonHoc();
+                    String mSs = mhs.getTenMonHoc();
+                    if(mS.equals(mSs) )
+                    {
+                        ktMonhoc =0;
+                        break;
+                    }
+                }
+                if(ktMonhoc==1)
+                {
+                    listMonHocGhi.add(mh);
+                }
+            }
+                                              
+        }
+        else
+        {
+            for(MonHoc mh :listMonHoc)
+            {
+                listMonHocGhi.add(mh);
+            }
+        }
+        
+        //ghi vao thời khóa biểu
+        try {
       File fileghi = new File("");
         String currentDirectory = fileghi.getAbsolutePath();
-        currentDirectory +="\\Data\\DuLieu\\DanhSachThoiKhoaBieu\\" +  cmbLopHoc.getSelectedItem().toString()+".txt";
+        currentDirectory +="\\Data\\DuLieu\\DanhSachThoiKhoaBieu\\" +cmbLopHoc.getSelectedItem().toString()+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      File f = new File(currentDirectory);
      FileWriter fw = new FileWriter(f);
      //Bước 2: Ghi dữ liệu
-     
-     //String khoaBieuLop = cmbLopHoc.getSelectedItem().toString() +"|"+ tenKhoaBieu+"\n";
-     // fw.write(khoaBieuLop);
      
     listMonHoc.forEach((element) -> {
         String dulieumonhoc = element.getMaMonHoc()+"|"+element.getTenMonHoc()+"|"+element.getPhongHoc()+"\n";
@@ -269,23 +361,60 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
      fw.close();
    } catch (IOException ex) {
      System.out.println("Loi ghi file: " + ex);
+ }
+        
+        
+        
+        
+        // Ghi Vào danh sách môn học
+
+        try {
+      File fileghi = new File("");
+        String currentDirectory = fileghi.getAbsolutePath();
+        currentDirectory +="\\Data\\DuLieu\\DanhSachMonHoc\\" +"MonHoc.txt";
+     //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
+     File f = new File(currentDirectory);
+     FileWriter fw = new FileWriter(f,true);
+     //Bước 2: Ghi dữ liệu
      
-    }
+    listMonHocGhi.forEach((element) -> {
+        String dulieumonhoc = element.getMaMonHoc()+"|"+element.getTenMonHoc()+"|"+element.getPhongHoc()+"\n";
+          try {
+              fw.write(dulieumonhoc);
+          } catch (IOException ex) {
+              Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        });
+
+    
+    
+     //Bước 3: Đóng luồng
+     fw.close();
+   } catch (IOException ex) {
+     System.out.println("Loi ghi file: " + ex);
+ }
+        
+        
          
          
          
-         
-       // Ghi danh sách sinh viên vào lớp hcọ
+       // Ghi danh sách sinh viên vào lớp học
+       
+       
+       
        
        List<SinhVien> listSinhVien = new  ArrayList<SinhVien>();
-       SinhVien sv = new SinhVien();
+       
+       for(MonHoc mh : listMonHoc)
+       {
+            SinhVien sv = new SinhVien();
        listSinhVien = sv.getAllSinhVien(cmbLopHoc.getSelectedItem().toString());
        
        
         try {
       File fileghi = new File("");
         String currentDirectory = fileghi.getAbsolutePath();
-        currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmbLopHoc.getSelectedItem().toString()+"-"+tenKhoaBieu+".txt";
+        currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmbLopHoc.getSelectedItem().toString()+"-"+mh.getTenMonHoc()+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      File f = new File(currentDirectory);
      FileWriter fw = new FileWriter(f);
@@ -302,13 +431,17 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
 
     
     
-     //Bước 3: Đóng luồng
-     fw.close();
-   } catch (IOException ex) {
-     System.out.println("Loi ghi file: " + ex);
- }
+            //Bước 3: Đóng luồng
+            fw.close();
+          } catch (IOException ex) {
+            System.out.println("Loi ghi file: " + ex);
+        }
+       }
+       
+       
+      
          
-        
+        LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
          
         
     }//GEN-LAST:event_btnImportCSVActionPerformed

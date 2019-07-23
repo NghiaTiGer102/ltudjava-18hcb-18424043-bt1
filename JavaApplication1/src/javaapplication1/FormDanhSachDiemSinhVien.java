@@ -54,8 +54,6 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtMSSV = new javax.swing.JTextField();
-        txtHoTen = new javax.swing.JTextField();
         txtDiemGk = new javax.swing.JTextField();
         txtDiemCK = new javax.swing.JTextField();
         txtDiemKhac = new javax.swing.JTextField();
@@ -76,6 +74,8 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnImport = new javax.swing.JButton();
+        lbMSSV = new javax.swing.JLabel();
+        lbHoTen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -94,14 +94,24 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
 
         jLabel5.setText("Họ tên");
 
+        cmbDiemLop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDiemLopActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Số lượng sinh viên");
 
         lbSoLuongSV.setText("0");
 
+        jLabel8.setBackground(new java.awt.Color(51, 0, 255));
+        jLabel8.setForeground(new java.awt.Color(51, 51, 255));
         jLabel8.setText("Tỉ lẹ đậu %");
 
         lbDau.setText("0");
 
+        jLabel10.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel10.setForeground(new java.awt.Color(255, 51, 51));
         jLabel10.setText("T ỉ lệ rớt %");
 
         lbRot.setText("0");
@@ -148,26 +158,30 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
             }
         });
 
+        lbMSSV.setText("MSSV");
+
+        lbHoTen.setText("HoTen");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(31, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(3, 3, 3)))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMSSV)
-                            .addComponent(txtHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbMSSV)
+                            .addComponent(lbHoTen)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cmbDiemLop, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addGap(22, 22, 22)
                         .addComponent(jLabel6)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -216,17 +230,19 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(txtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDiemGk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDiemCK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(txtDiemGk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtDiemCK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(lbHoTen)))
+                    .addComponent(lbMSSV))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,17 +255,19 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(lbSoLuongSV)
                             .addComponent(jLabel8)
-                            .addComponent(lbDau)
-                            .addComponent(lbRot))
+                            .addComponent(lbDau))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbSoDau)
-                            .addComponent(lbSoRot)
                             .addComponent(jLabel11)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(lbRot))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel12)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(lbSoRot))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -270,7 +288,7 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
        
          File fileghi = new File("");
         String currentDirectory = fileghi.getAbsolutePath();
-        currentDirectory +="\\Data\\Dulieu\\DanhSachDiemSinhVien";
+        currentDirectory +="\\Data\\Dulieu\\DanhSachLopHocMopHoc";
         File dir = new File(currentDirectory);
  
         File[] txtFiles = dir.listFiles(new TxtFileNameFilter());
@@ -291,7 +309,7 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
          File file = new File("");
         String currentDirectory = file.getAbsolutePath();
           List<DiemSV> listDiemSinhVien = new ArrayList<DiemSV>();
-        currentDirectory +="\\Data\\DuLieu\\DanhSachDiemSinhVien\\" + lophoc+".txt";
+        currentDirectory +="\\Data\\DuLieu\\DanhSachDiemSinhVien\\" + lophoc+ ".txt";
         Path pathToFile = Paths.get(currentDirectory);
         String lopHoc ="";
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
@@ -389,8 +407,8 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
             return;
         }
         
-        txtMSSV.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 1).toString());
-        txtHoTen.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 2).toString());
+        lbMSSV.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 1).toString());
+        lbHoTen.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 2).toString());
         txtDiemGk.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 3).toString());
         txtDiemCK.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 4).toString());
         txtDiemKhac.setText(tbDiemSV.getValueAt(tbDiemSV.getSelectedRow(), 5).toString());
@@ -459,7 +477,7 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
                   
      for(int i=0;i<listDiemSinhVien.size();i++)
      {
-      if(listDiemSinhVien.get(i).getMSSV().equals(txtMSSV.getText()))
+      if(listDiemSinhVien.get(i).getMSSV().equals(lbMSSV.getText()))
       {
           listDiemSinhVien.get(i).setDiemGK(txtDiemGk.getText());
           listDiemSinhVien.get(i).setDiemCK(txtDiemCK.getText());
@@ -523,7 +541,11 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
      
       List<DiemSV> listDiemSV = new ArrayList<DiemSV>();
         Path pathToFile = Paths.get(fileCSV);
-
+        File ff = new File(fileCSV);
+        if(!ff.exists())
+        {
+            return;
+        }
         // create an instance of BufferedReader
         // using try with resource, Java 7 feature to close resources
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
@@ -584,6 +606,11 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
  }
     }//GEN-LAST:event_btnImportActionPerformed
 
+    private void cmbDiemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDiemLopActionPerformed
+        // TODO add your handling code here:
+        LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
+    }//GEN-LAST:event_cmbDiemLopActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -635,6 +662,8 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbDau;
+    private javax.swing.JLabel lbHoTen;
+    private javax.swing.JLabel lbMSSV;
     private javax.swing.JLabel lbRot;
     private javax.swing.JLabel lbSoDau;
     private javax.swing.JLabel lbSoLuongSV;
@@ -644,7 +673,5 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
     private javax.swing.JTextField txtDiemCK;
     private javax.swing.JTextField txtDiemGk;
     private javax.swing.JTextField txtDiemKhac;
-    private javax.swing.JTextField txtHoTen;
-    private javax.swing.JTextField txtMSSV;
     // End of variables declaration//GEN-END:variables
 }
