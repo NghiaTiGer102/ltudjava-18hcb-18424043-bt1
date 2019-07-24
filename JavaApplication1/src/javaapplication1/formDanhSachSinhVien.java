@@ -71,7 +71,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDanhSachSinhVien = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -300,7 +300,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
      System.out.println("Loi ghi file: " + ex);
  }
 
-        
+        HienThiDanhSachLopLenCombobox();
     
     }//GEN-LAST:event_btnInportCSVActionPerformed
 
@@ -312,6 +312,16 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + lophoc+".txt";
         Path pathToFile = Paths.get(currentDirectory);
         String lopHoc ="";
+        
+      
+        
+         File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+            return;
+        }
+        
+        
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
         {
 
@@ -365,8 +375,13 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         
-        HienThiDanhSachLopLenCombobox();                       
-        LoadDuLieuSinHVien(columnNames,cmbDanhSachLopHoc.getSelectedItem().toString());                 
+        HienThiDanhSachLopLenCombobox();         
+        if(cmbDanhSachLopHoc.getItemCount()>0)
+        {
+             LoadDuLieuSinHVien(columnNames,cmbDanhSachLopHoc.getSelectedItem().toString());
+        }
+       
+                        
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -474,7 +489,12 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
 
     private void cmbDanhSachLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDanhSachLopHocActionPerformed
         // TODO add your handling code here:
-        LoadDuLieuSinHVien(columnNames, cmbDanhSachLopHoc.getSelectedItem().toString());
+        if(cmbDanhSachLopHoc.getItemCount()>0)
+        {
+            LoadDuLieuSinHVien(columnNames, cmbDanhSachLopHoc.getSelectedItem().toString());
+        }
+        
+        
     }//GEN-LAST:event_cmbDanhSachLopHocActionPerformed
 
     public boolean accept(File dir, String name) {
@@ -488,7 +508,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     
      void  HienThiDanhSachLopLenCombobox()
     {
-       
+       cmbDanhSachLopHoc.removeAllItems();;
          File fileghi = new File("");
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\Dulieu\\DanhSachSinhVien";
@@ -498,6 +518,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
  
         for (File txtFile : txtFiles) {
              File f = new File(txtFile.getAbsolutePath());
+              
              
             cmbDanhSachLopHoc.addItem(f.getName().toString().replace(".txt", ""));
         }

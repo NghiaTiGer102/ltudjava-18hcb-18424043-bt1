@@ -128,7 +128,13 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String tenKhoaBieu="";
         // create an instance of BufferedReader
         // using try with resource, Java 7 feature to close resources
-        
+             File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+             TableModel tablemodel = new DefaultTableModel(null, columnNames);
+             tbThoiKhoaBieu.setModel(tablemodel);
+            return;
+        }
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
         {
 
@@ -193,7 +199,11 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String tenKhoaBieu="";
         // create an instance of BufferedReader
         // using try with resource, Java 7 feature to close resources
-        
+         File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+            return null;
+        }
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
         {
 
@@ -440,8 +450,10 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
        
        
       
-         
-        LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+    if(cmbLopHoc.getItemCount()>0)
+        {
+             LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+        }
          
         
     }//GEN-LAST:event_btnImportCSVActionPerformed
@@ -449,12 +461,18 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         HienThiDanhSachLopLenCombobox();
-        LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+        if(cmbLopHoc.getItemCount()>0)
+        {
+             LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void cmbLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLopHocActionPerformed
         // TODO add your handling code here:
-         LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+         if(cmbLopHoc.getItemCount()>0)
+        {
+             LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_cmbLopHocActionPerformed
 
     

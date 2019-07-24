@@ -189,6 +189,13 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + lophoc+".txt";
         Path pathToFile = Paths.get(currentDirectory);
         String lopHoc ="";
+        
+         File ff = new File(currentDirectory);
+              if(!ff.exists())
+              {
+                  return;
+              }
+        
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
         {
 
@@ -260,7 +267,10 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         HienThiDanhSachLopLenCombobox();
-        LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+       if(cmdLopMonHoc.getItemCount()>0)
+        {
+             LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+        }
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -278,6 +288,13 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmdLopMonHoc.getSelectedItem().toString()+".txt";
         System.out.println("Current working directory : " + currentDirectory);
   BufferedReader br = null;
+  
+  
+   File ff = new File(currentDirectory);
+              if(!ff.exists())
+              {
+                  return;
+              }
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
@@ -339,8 +356,11 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
    } catch (IOException ex) {
      System.out.println("Loi ghi file: " + ex);
  }
-        
-        LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+        if(cmdLopMonHoc.getItemCount()>0)
+        {
+             LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+        }
+       
         
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -360,6 +380,13 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmdLopMonHoc.getSelectedItem().toString()+".txt";
         System.out.println("Current working directory : " + currentDirectory);
   BufferedReader br = null;
+  
+
+        File ff = new File(currentDirectory);
+              if(!ff.exists())
+              {
+                  return;
+              }
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
@@ -439,7 +466,10 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
      System.out.println("Loi ghi file: " + ex);
  }
         
-        LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+       if(cmdLopMonHoc.getItemCount()>0)
+        {
+             LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
+        }
         
     }//GEN-LAST:event_btnXoaActionPerformed
 

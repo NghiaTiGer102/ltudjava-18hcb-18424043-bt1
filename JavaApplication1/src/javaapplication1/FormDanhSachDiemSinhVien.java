@@ -300,6 +300,7 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
         }
     }
     
+      
     
     void LoadDuLieuDiemSinhVien(String[] columnNames,String lophoc)
     {
@@ -312,6 +313,21 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachDiemSinhVien\\" + lophoc+ ".txt";
         Path pathToFile = Paths.get(currentDirectory);
         String lopHoc ="";
+        
+        File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {        
+          TableModel tablemodel = new DefaultTableModel(null, columnNames);
+          tbDiemSV.setModel(tablemodel);
+          lbDau.setText(0+"");
+          lbRot.setText(0+"");
+          lbSoLuongSV.setText(0+"");
+          lbSoRot.setText(0+"");
+          lbSoDau.setText(0+"");
+          lbHoTen.setText("HoTen");
+          lbMSSV.setText("MSSV");
+            return;
+        }
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
         {
 
@@ -394,8 +410,10 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         HienThiDanhSachLopLenCombobox();
-        LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
-        
+         if(cmbDiemLop.getItemCount()>0)
+        {
+             LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
+        }        
     }//GEN-LAST:event_formWindowOpened
 
     private void tbDiemSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDiemSVMouseClicked
@@ -439,6 +457,11 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachDiemSinhVien\\" + cmbDiemLop.getSelectedItem().toString()+".txt";
         System.out.println("Current working directory : " + currentDirectory);
   BufferedReader br = null;
+  File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+            return;
+        }
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
@@ -516,7 +539,10 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
      System.out.println("Loi ghi file: " + ex);
  }
         
-        LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
+       if(cmbDiemLop.getItemCount()>0)
+        {
+             LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
+        }
         
         
     }//GEN-LAST:event_btnCappNhatActionPerformed
@@ -608,7 +634,10 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
 
     private void cmbDiemLopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDiemLopActionPerformed
         // TODO add your handling code here:
-        LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
+         if(cmbDiemLop.getItemCount()>0)
+        {
+             LoadDuLieuDiemSinhVien(columnNames, cmbDiemLop.getSelectedItem().toString());
+        }
     }//GEN-LAST:event_cmbDiemLopActionPerformed
 
     /**
