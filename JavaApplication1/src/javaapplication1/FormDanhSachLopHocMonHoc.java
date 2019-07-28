@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javaapplication1.Entities.SinhVien;
 import javaapplication1.Extension.TxtFileNameFilter;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -266,6 +267,9 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        TableModel tablemodel = new DefaultTableModel(null, columnNames);
+        tbSinhVienMonHoc.setModel(tablemodel);
+        this.setLocationRelativeTo(null);
         HienThiDanhSachLopLenCombobox();
        if(cmdLopMonHoc.getItemCount()>0)
         {
@@ -374,7 +378,17 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
             return;
         }
         
-         List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
+        
+         int result = JOptionPane.showConfirmDialog(
+                null,
+                "Bạn có đồng ý xóa không?",
+                "Thông báo",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE);
+
+            if (result == JOptionPane.YES_OPTION)
+            {
+                List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
         File file = new File("");
         String currentDirectory = file.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmdLopMonHoc.getSelectedItem().toString()+".txt";
@@ -470,11 +484,20 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         {
              LoadDuLieuSinHVien(columnNames, cmdLopMonHoc.getSelectedItem().toString());
         }
+            }
+            
+        
+         
         
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void tbSinhVienMonHocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSinhVienMonHocMouseClicked
         // TODO add your handling code here:
+         txtMSSV.setText(tbSinhVienMonHoc.getValueAt(tbSinhVienMonHoc.getSelectedRow(), 1).toString());
+        txtHoTen.setText(tbSinhVienMonHoc.getValueAt(tbSinhVienMonHoc.getSelectedRow(), 2).toString());
+        txtGioiTinh.setText(tbSinhVienMonHoc.getValueAt(tbSinhVienMonHoc.getSelectedRow(), 3).toString());
+        txtCMND.setText(tbSinhVienMonHoc.getValueAt(tbSinhVienMonHoc.getSelectedRow(), 4).toString());
+       
          
     }//GEN-LAST:event_tbSinhVienMonHocMouseClicked
 

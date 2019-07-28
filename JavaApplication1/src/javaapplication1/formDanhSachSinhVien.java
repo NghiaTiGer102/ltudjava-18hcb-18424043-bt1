@@ -72,6 +72,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         tbDanhSachSinhVien = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -117,6 +118,11 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbDanhSachSinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDanhSachSinhVienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbDanhSachSinhVien);
 
         scrollPane2.add(jScrollPane1);
@@ -374,7 +380,9 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+        TableModel tablemodel = new DefaultTableModel(null, columnNames);
+        tbDanhSachSinhVien.setModel(tablemodel);
+        this.setLocationRelativeTo(null);
         HienThiDanhSachLopLenCombobox();         
         if(cmbDanhSachLopHoc.getItemCount()>0)
         {
@@ -413,6 +421,16 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
                 
                listSinhVien.add(sv);            
             }
+            
+            for(int i=0;i<listSinhVien.size();i++)
+            {
+                if(txtMSSV.getText().equals(listSinhVien.get(i).getmSSV()))
+                {
+                    JOptionPane.showMessageDialog(null, "MSSV đã tồn tại xin kiểm tra lại","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+            }
+            
             
            SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtGioiTinh.getText(),txtCMND.getText());
            
@@ -496,6 +514,15 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_cmbDanhSachLopHocActionPerformed
+
+    private void tbDanhSachSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachSinhVienMouseClicked
+        // TODO add your handling code here:
+         txtMSSV.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 1).toString());
+        txtHoTen.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 2).toString());
+        txtGioiTinh.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 3).toString());
+        txtCMND.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 4).toString());
+        
+    }//GEN-LAST:event_tbDanhSachSinhVienMouseClicked
 
     public boolean accept(File dir, String name) {
  

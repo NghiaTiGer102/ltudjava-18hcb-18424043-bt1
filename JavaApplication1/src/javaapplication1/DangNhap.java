@@ -44,6 +44,11 @@ public class DangNhap extends javax.swing.JFrame {
         txtMatKhau = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 102, 255));
         jButton1.setText("Đăng nhập");
@@ -106,7 +111,12 @@ public class DangNhap extends javax.swing.JFrame {
         String currentDirectory = file.getAbsolutePath();
         System.out.println("Current working directory : " + currentDirectory);
  
-        
+        File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+             JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         
         BufferedReader br = null;
         
@@ -115,6 +125,13 @@ public class DangNhap extends javax.swing.JFrame {
         {
             user = "giaovu";
             currentDirectory+="\\Data\\TaiKhoan\\GiaoVu.txt";
+            
+              ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+             JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
@@ -166,7 +183,14 @@ public class DangNhap extends javax.swing.JFrame {
         }
         else
         {
+           
               currentDirectory+="\\Data\\TaiKhoan\\TaiKhoan.txt";
+               ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+             JOptionPane.showMessageDialog(null, "Tài khoản hoặc mật khẩu không đúng","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
               try {   
             br = new BufferedReader(new FileReader(currentDirectory));       
 
@@ -222,12 +246,18 @@ public class DangNhap extends javax.swing.JFrame {
 
         
         }
+        
 
       
     
        
        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        this.setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

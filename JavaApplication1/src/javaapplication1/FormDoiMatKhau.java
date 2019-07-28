@@ -46,7 +46,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         btnCapNhat = new javax.swing.JButton();
         txtMatKhau = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -103,6 +103,9 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        this.setLocationRelativeTo(null);
+        txtTaiKhoan.setEnabled(false);
+        
         txtTaiKhoan.setText(DangNhap.user);
     }//GEN-LAST:event_formWindowOpened
 
