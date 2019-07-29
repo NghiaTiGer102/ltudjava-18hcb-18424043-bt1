@@ -83,6 +83,8 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
 
         lbDiemTong.setText("0");
 
+        cmbDiemSV.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+
         jLabel9.setText("MSSV");
 
         lbMSSV.setText("0");

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -43,7 +44,8 @@ public class DangNhap extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtMatKhau = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Đăng nhập");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -158,7 +160,7 @@ public class DangNhap extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Đăng nhập thành công","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
                     FormGiaoDienChinh frm = new FormGiaoDienChinh();
                     frm.setVisible(true);
-                    this.dispose();
+                      this.hide();
                 } 
                 else 
                 {
@@ -221,7 +223,8 @@ public class DangNhap extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Đăng nhập thành công","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
                     FormDiemSinhVien frm = new FormDiemSinhVien();
                     frm.setVisible(true);
-                    this.dispose();
+                    this.hide();
+                    
                 } 
                 else 
                 {

@@ -64,12 +64,14 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         btnXoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Danh sách lớp môn học");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
+        cmdLopMonHoc.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         cmdLopMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLopMonHocActionPerformed(evt);

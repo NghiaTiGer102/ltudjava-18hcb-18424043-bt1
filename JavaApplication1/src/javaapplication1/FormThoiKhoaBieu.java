@@ -8,9 +8,13 @@ package javaapplication1;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +26,7 @@ import java.util.logging.Logger;
 import javaapplication1.Entities.MonHoc;
 import javaapplication1.Entities.SinhVien;
 import javaapplication1.Extension.TxtFileNameFilter;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -54,6 +59,7 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
         tbThoiKhoaBieu = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Thời khóa biểu");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -67,6 +73,7 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
             }
         });
 
+        cmbLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         cmbLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLopHocActionPerformed(evt);
@@ -249,7 +256,9 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
     
     
     private void btnImportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportCSVActionPerformed
-        // TODO add your handling code here:
+        
+        try {
+            // TODO add your handling code here:
         FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");        
          dialog.setFile("*.CSV");
 
@@ -314,7 +323,17 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
          List<MonHoc> listMonHocs = GhiDanhSachMonHoc();
  
         List<MonHoc> listMonHocGhi = new ArrayList<MonHoc>();
-        if(listMonHocs.size()>0)
+        
+        if(listMonHocs==null)
+        {
+            for(MonHoc mh :listMonHoc)
+            {
+                listMonHocGhi.add(mh);
+            }
+        }
+        else
+        {
+              if(listMonHocs.size()>0)
         {
            
             
@@ -345,6 +364,9 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
                 listMonHocGhi.add(mh);
             }
         }
+        }
+            
+      
         
         //ghi vao thời khóa biểu
         try {
@@ -352,8 +374,8 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachThoiKhoaBieu\\" +cmbLopHoc.getSelectedItem().toString()+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f);
+     Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      //Bước 2: Ghi dữ liệu
      
     listMonHoc.forEach((element) -> {
@@ -383,14 +405,14 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachMonHoc\\" +"MonHoc.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f,true);
+     Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      //Bước 2: Ghi dữ liệu
      
     listMonHocGhi.forEach((element) -> {
         String dulieumonhoc = element.getMaMonHoc()+"|"+element.getTenMonHoc()+"|"+element.getPhongHoc()+"\n";
           try {
-              fw.write(dulieumonhoc);
+              fw.append(dulieumonhoc);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -426,8 +448,8 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmbLopHoc.getSelectedItem().toString()+"-"+mh.getTenMonHoc()+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f);
+      Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
@@ -455,6 +477,11 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
              LoadDuLieuMonHoc(columnNames, cmbLopHoc.getSelectedItem().toString());
         }
          
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null, "Lỗi xin kiểm tra lại","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
         
     }//GEN-LAST:event_btnImportCSVActionPerformed
 

@@ -6,10 +6,14 @@
 package javaapplication1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +51,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
         txtMatKhau = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Đổi mật khẩu");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -208,7 +213,8 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
          //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      File f = new File(currentDirectory);
         try {
-            FileWriter fw = new FileWriter(f);
+            Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
             //Bước 2: Ghi dữ liệu
                listTaiKhoan.forEach((element) -> {
         String dulieudiemsinhvien = element.getTaiKhoan()+"|"+element.getMatKhau()+"\n";

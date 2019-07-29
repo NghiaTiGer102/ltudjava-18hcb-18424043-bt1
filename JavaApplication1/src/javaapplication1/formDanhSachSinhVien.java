@@ -5,15 +5,23 @@
  */
 package javaapplication1;
 
-import com.sun.org.apache.xerces.internal.impl.dtd.models.CMBinOp;
+
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.awt.print.Book;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -72,6 +80,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         tbDanhSachSinhVien = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Danh sách sinh viên");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -101,6 +110,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
+        cmbDanhSachLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
         cmbDanhSachLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDanhSachLopHocActionPerformed(evt);
@@ -191,7 +201,11 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
 
     private void btnInportCSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInportCSVActionPerformed
         // TODO add your handling code here:
-          FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
+        
+        
+        
+        try {
+            FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
         
          dialog.setFile("*.CSV");
       
@@ -258,14 +272,14 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + lopHoc+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f);
+     Writer out = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
         String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
           try {
-              fw.write(dulieusinhvien);
+              out.write(dulieusinhvien);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -274,7 +288,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     
     
      //Bước 3: Đóng luồng
-     fw.close();
+     out.close();
    } catch (IOException ex) {
      System.out.println("Loi ghi file: " + ex);
  }
@@ -285,8 +299,8 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f,true);
+     Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
@@ -307,6 +321,13 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
  }
 
         HienThiDanhSachLopLenCombobox();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Lỗi xin kiểm tra lại","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        
+        
+          
     
     }//GEN-LAST:event_btnInportCSVActionPerformed
 
@@ -453,14 +474,13 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         
         
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f);
-     //Bước 2: Ghi dữ liệu
+     Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      
     listSinhVien.forEach((element) -> {
         String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
           try {
-              fw.write(dulieusinhvien);
+              fw.append(dulieusinhvien);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -480,9 +500,8 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
          currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f,true);
-     //Bước 2: Ghi dữ liệu
+     Writer fw = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream(currentDirectory), "UTF-8"));
      
     
         String dulieusinhvien = txtMSSV.getText()+"|"+txtMSSV.getText()+"\n";
@@ -542,12 +561,15 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         File dir = new File(currentDirectory);
  
         File[] txtFiles = dir.listFiles(new TxtFileNameFilter());
- 
+       
         for (File txtFile : txtFiles) {
              File f = new File(txtFile.getAbsolutePath());
               
+             String lop =   f.getName().toString().replace(".txt", "");
              
-            cmbDanhSachLopHoc.addItem(f.getName().toString().replace(".txt", ""));
+            // Java will convert it into a UTF-16 representation
+
+            cmbDanhSachLopHoc.addItem(lop);
         }
     }
     
