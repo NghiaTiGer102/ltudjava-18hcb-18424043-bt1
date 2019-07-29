@@ -60,8 +60,11 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
         lbMSSV = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -83,7 +86,7 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
 
         lbDiemTong.setText("0");
 
-        cmbDiemSV.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        cmbDiemSV.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
 
         jLabel9.setText("MSSV");
 
@@ -153,7 +156,7 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
                     .addComponent(lbDiemTong))
                 .addGap(18, 18, 18)
                 .addComponent(cmbDiemSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,8 +193,11 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
                 // use string.split to load a string array with the values from
                 // each line of
                 // the file, using a comma as the delimiter
-                String[] attributes = line.split("\\|");              
-                if(attributes[0].equals(DangNhap.user))
+                String[] attributes = line.split("\\|");          
+                String tk = attributes[0 ];
+              
+                
+                 if(tk.contains(DangNhap.user))
                 {
                     return true;
                 }
@@ -239,6 +245,10 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
     
     void LoadDuLieuDiemSinhVien(String lophoc)
     {       
+        if(lophoc==null)
+        {
+            return;
+        }
          File file = new File("");
         String currentDirectory = file.getAbsolutePath();
           List<DiemSV> listDiemSinhVien = new ArrayList<DiemSV>();
@@ -290,7 +300,7 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
         
         for(DiemSV sv :listDiemSinhVien)
         {
-            if(sv.getMSSV().equals(DangNhap.user))
+            if(sv.getMSSV().contains(DangNhap.user))
             {
                 lbDiemGK.setText(sv.getDiemGK());
                 lbMSSV.setText(sv.getMSSV());
@@ -310,7 +320,12 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        this.setLocationRelativeTo(null);
         HienThiDanhSachLopLenCombobox();
-        LoadDuLieuDiemSinhVien(cmbDiemSV.getSelectedItem().toString());
+        
+          if(cmbDiemSV.getItemCount()>0)
+        {
+             LoadDuLieuDiemSinhVien(cmbDiemSV.getSelectedItem().toString());
+        }      
+        
         
         
         
@@ -321,6 +336,12 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
         FormDoiMatKhau frm = new FormDoiMatKhau();
         frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        DangNhap frm = new DangNhap();
+        frm.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

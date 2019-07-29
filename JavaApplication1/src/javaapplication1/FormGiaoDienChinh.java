@@ -35,7 +35,7 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
         btnDanhSachDiem = new javax.swing.JButton();
         btnDoiMatKhau = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Quản lý");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -46,28 +46,28 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
             }
         });
 
-        btnDanhSachSinhVien.setText("Danh sách sinh viên");
+        btnDanhSachSinhVien.setText("Quản lỳ sinh viên");
         btnDanhSachSinhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDanhSachSinhVienActionPerformed(evt);
             }
         });
 
-        btnDanhSachMonHoc.setText("Danh sách lớp môn học");
+        btnDanhSachMonHoc.setText("Quản lý lớp môn học");
         btnDanhSachMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDanhSachMonHocActionPerformed(evt);
             }
         });
 
-        btnDanhSachThoiKhoaBieu.setText("Danh sach thời khóa biểu");
+        btnDanhSachThoiKhoaBieu.setText("Quản lý thời khóa biểu");
         btnDanhSachThoiKhoaBieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDanhSachThoiKhoaBieuActionPerformed(evt);
             }
         });
 
-        btnDanhSachDiem.setText("Danh sách điểm");
+        btnDanhSachDiem.setText("Quản lý điểm");
         btnDanhSachDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDanhSachDiemActionPerformed(evt);
@@ -91,7 +91,7 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
                     .addComponent(btnDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDanhSachSinhVien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDanhSachThoiKhoaBieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnDanhSachDiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDanhSachMonHoc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,7 +140,7 @@ public class FormGiaoDienChinh extends javax.swing.JFrame {
             }
             else
             {
-              
+                 this.setVisible(true);
             }
         
         

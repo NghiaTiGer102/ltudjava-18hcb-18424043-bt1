@@ -6,10 +6,14 @@
 package javaapplication1;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -71,7 +75,7 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
             }
         });
 
-        cmdLopMonHoc.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        cmdLopMonHoc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         cmdLopMonHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLopMonHocActionPerformed(evt);
@@ -86,6 +90,7 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
 
         jLabel4.setText("CMND");
 
+        tbSinhVienMonHoc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tbSinhVienMonHoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -293,7 +298,7 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         String currentDirectory = file.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmdLopMonHoc.getSelectedItem().toString()+".txt";
         System.out.println("Current working directory : " + currentDirectory);
-  BufferedReader br = null;
+    Path pathToFile = Paths.get(currentDirectory);
   
   
    File ff = new File(currentDirectory);
@@ -301,12 +306,15 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
               {
                   return;
               }
-              try {   
-            br = new BufferedReader(new FileReader(currentDirectory));       
+          
+           
+              
+              
+              
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
+        {
 
-            System.out.println("Đọc nội dung file sử dụng phương thức readLine()");
-
-            String textInALine;
+             String textInALine;
            
          
             
@@ -321,19 +329,18 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
                listSinhVien.add(sv);            
             }
             
-           SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtHoTen.getText(),txtCMND.getText());
+           SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtGioiTinh.getText(),txtCMND.getText());
            
            listSinhVien.add(sv);
+            // loop until all lines are read
+            
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                }
+        } catch (IOException ioe) 
+        {
+            System.out.println("javaapplication1.formDanhSachSinhVien.formWindowOpened()");
+            ioe.printStackTrace();
+          
+        }
               
               
               
@@ -342,8 +349,8 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         
         
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f);
+      Writer fw = new BufferedWriter(new OutputStreamWriter(
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
@@ -442,8 +449,8 @@ public class FormDanhSachLopHocMonHoc extends javax.swing.JFrame {
         
         
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     File f = new File(currentDirectory);
-     FileWriter fw = new FileWriter(f);
+      Writer fw = new BufferedWriter(new OutputStreamWriter(
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
     
      

@@ -1,8 +1,4 @@
-﻿CTT001|Java|C31
-CTT002|Mạng máy tính|C31
-﻿CTT011|Thiết  Kế Giao Diện|C32
-CTT012|Kiểm chứng phần mềm|C32
-17424043|Tr?n Huu Nghia6|1
-17424041|asd|5
-17424039|Nghia|8
-17424037|dddd|1
+?CTT012|Thi?t k? giao di?n|C32
+CTT012|Ki?m ch?ng ph?n m?m|C32
+?CTT001|L?p tr�nh ?ng d?ng Java|C31
+CTT002|M?ng m�y t�nh|C31

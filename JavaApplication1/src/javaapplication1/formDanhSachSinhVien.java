@@ -5,23 +5,19 @@
  */
 package javaapplication1;
 
-
+import com.sun.org.apache.xerces.internal.impl.dtd.models.CMBinOp;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.awt.print.Book;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -110,13 +106,14 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
             }
         });
 
-        cmbDanhSachLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        cmbDanhSachLopHoc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         cmbDanhSachLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDanhSachLopHocActionPerformed(evt);
             }
         });
 
+        tbDanhSachSinhVien.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tbDanhSachSinhVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -272,14 +269,14 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + lopHoc+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     Writer out = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+     Writer fw = new BufferedWriter(new OutputStreamWriter(
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
         String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
           try {
-              out.write(dulieusinhvien);
+              fw.write(dulieusinhvien);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -287,8 +284,9 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
 
     
     
+    
      //Bước 3: Đóng luồng
-     out.close();
+     fw.close();
    } catch (IOException ex) {
      System.out.println("Loi ghi file: " + ex);
  }
@@ -299,14 +297,14 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+    Writer fw = new BufferedWriter(new OutputStreamWriter(
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
         String dulieusinhvien = element.getmSSV()+"|"+element.getmSSV()+"\n";
           try {
-              fw.write(dulieusinhvien);
+              fw.append(dulieusinhvien);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -417,33 +415,44 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         
-         List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
-        File file = new File("");
+        
+        
+         File file = new File("");
         String currentDirectory = file.getAbsolutePath();
+          List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
         currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + cmbDanhSachLopHoc.getSelectedItem().toString()+".txt";
-        System.out.println("Current working directory : " + currentDirectory);
-  BufferedReader br = null;
-              try {   
-            br = new BufferedReader(new FileReader(currentDirectory));       
+       
+        String lopHoc ="";
+        
+      
+        
+         File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+            return;
+        }
+        
+         Path pathToFile = Paths.get(currentDirectory);
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
+        {
 
-            System.out.println("Đọc nội dung file sử dụng phương thức readLine()");
-
-            String textInALine;
-           
-         
-            
-            while ((textInALine = br.readLine()) != null) {           
-                
+            // read the first line from the text file
+            String line = br.readLine();                                         
+            while (line != null) 
+            {
                
-                
-                String[] sinhVienTemp = textInALine.split("\\|");
-                
-               SinhVien sv = new SinhVien(sinhVienTemp[0],sinhVienTemp[1],sinhVienTemp[2],sinhVienTemp[3]);
-                
-               listSinhVien.add(sv);            
+               String[] attributes = line.split("\\|");
+                SinhVien sv = new SinhVien();
+                 sv = sv.ThemSinhVien(attributes);
+                // adding book into ArrayList
+                listSinhVien.add(sv);
+
+                // read next line before looping
+                // if end of file reached, line would be null
+                line = br.readLine();
             }
             
-            for(int i=0;i<listSinhVien.size();i++)
+             for(int i=0;i<listSinhVien.size();i++)
             {
                 if(txtMSSV.getText().equals(listSinhVien.get(i).getmSSV()))
                 {
@@ -453,20 +462,18 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
             }
             
             
-           SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtGioiTinh.getText(),txtCMND.getText());
-           
-           listSinhVien.add(sv);
+            // loop until all lines are read
+            
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                }
-              
+        } catch (IOException ioe) 
+        {
+            System.out.println("javaapplication1.formDanhSachSinhVien.formWindowOpened()");
+            ioe.printStackTrace();
+          
+        }
+        
+        SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtGioiTinh.getText(),txtCMND.getText());
+        listSinhVien.add(sv);
               
               
               try {
@@ -475,12 +482,13 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+     new FileOutputStream(currentDirectory), "UTF8"));
+     //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
         String dulieusinhvien = element.getmSSV()+"|"+element.getHoTen()+"|"+element.getGioiTinh()+"|"+element.getcMND()+"\n";
           try {
-              fw.append(dulieusinhvien);
+              fw.write(dulieusinhvien);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -501,12 +509,13 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+     new FileOutputStream(currentDirectory), "UTF8"));
+     //Bước 2: Ghi dữ liệu
      
     
         String dulieusinhvien = txtMSSV.getText()+"|"+txtMSSV.getText()+"\n";
           try {
-              fw.write(dulieusinhvien);
+              fw.append(dulieusinhvien);
           } catch (IOException ex) {
               Logger.getLogger(formDanhSachSinhVien.class.getName()).log(Level.SEVERE, null, ex);
           }
@@ -561,15 +570,12 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         File dir = new File(currentDirectory);
  
         File[] txtFiles = dir.listFiles(new TxtFileNameFilter());
-       
+ 
         for (File txtFile : txtFiles) {
              File f = new File(txtFile.getAbsolutePath());
               
-             String lop =   f.getName().toString().replace(".txt", "");
              
-            // Java will convert it into a UTF-16 representation
-
-            cmbDanhSachLopHoc.addItem(lop);
+            cmbDanhSachLopHoc.addItem(f.getName().toString().replace(".txt", ""));
         }
     }
     

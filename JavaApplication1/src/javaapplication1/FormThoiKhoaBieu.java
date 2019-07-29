@@ -73,13 +73,15 @@ public class FormThoiKhoaBieu extends javax.swing.JFrame {
             }
         });
 
-        cmbLopHoc.setFont(new java.awt.Font("Times New Roman", 0, 13)); // NOI18N
+        cmbLopHoc.setEditable(true);
+        cmbLopHoc.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         cmbLopHoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLopHocActionPerformed(evt);
             }
         });
 
+        tbThoiKhoaBieu.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         tbThoiKhoaBieu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -375,7 +377,7 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         currentDirectory +="\\Data\\DuLieu\\DanhSachThoiKhoaBieu\\" +cmbLopHoc.getSelectedItem().toString()+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listMonHoc.forEach((element) -> {
@@ -405,8 +407,8 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachMonHoc\\" +"MonHoc.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-     Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+    Writer fw = new BufferedWriter(new OutputStreamWriter(
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listMonHocGhi.forEach((element) -> {
@@ -448,8 +450,8 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         String currentDirectory = fileghi.getAbsolutePath();
         currentDirectory +="\\Data\\DuLieu\\DanhSachLopHocMopHoc\\" + cmbLopHoc.getSelectedItem().toString()+"-"+mh.getTenMonHoc()+".txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
-      Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+    Writer fw = new BufferedWriter(new OutputStreamWriter(
+     new FileOutputStream(currentDirectory), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {

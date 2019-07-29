@@ -6,14 +6,10 @@
 package javaapplication1;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -213,8 +209,7 @@ public class FormDoiMatKhau extends javax.swing.JFrame {
          //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      File f = new File(currentDirectory);
         try {
-            Writer fw = new BufferedWriter(new OutputStreamWriter(
-    new FileOutputStream(currentDirectory), "UTF-8"));
+            FileWriter fw = new FileWriter(f);
             //Bước 2: Ghi dữ liệu
                listTaiKhoan.forEach((element) -> {
         String dulieudiemsinhvien = element.getTaiKhoan()+"|"+element.getMatKhau()+"\n";
