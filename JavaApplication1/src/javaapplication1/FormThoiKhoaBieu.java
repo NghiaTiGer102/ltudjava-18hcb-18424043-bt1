@@ -408,7 +408,7 @@ String[] columnNames = { "STT", "Mã môn học","Tên môn học", "Phòng họ
         currentDirectory +="\\Data\\DuLieu\\DanhSachMonHoc\\" +"MonHoc.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
     Writer fw = new BufferedWriter(new OutputStreamWriter(
-     new FileOutputStream(currentDirectory), "UTF8"));
+     new FileOutputStream(currentDirectory,true), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listMonHocGhi.forEach((element) -> {

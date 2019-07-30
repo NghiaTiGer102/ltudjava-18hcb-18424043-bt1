@@ -34,6 +34,7 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
     /**
      * Creates new form FormDiemSinhVien
      */
+    String[] columnNames = { "STT","Môn Học", "Điểm GK","Điểm CK","Điểm khác","Điểm tổng" };
     public FormDiemSinhVien() {
         initComponents();
     }
@@ -47,20 +48,20 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        scrollPane1 = new java.awt.ScrollPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDiemSV = new javax.swing.JTable();
+        lbMSSV = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lbDiemGK = new javax.swing.JLabel();
-        lbDiemCK = new javax.swing.JLabel();
-        lbDiemKhac = new javax.swing.JLabel();
-        lbDiemTong = new javax.swing.JLabel();
-        cmbDiemSV = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        lbMSSV = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lbHoTen = new javax.swing.JLabel();
+        lbLopHoc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Điểm sinh viên");
+        setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -70,28 +71,6 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Điểm Gk");
-
-        jLabel2.setText("Điểm CK");
-
-        jLabel3.setText("Điểm Khác");
-
-        jLabel4.setText("Điểm tổng");
-
-        lbDiemGK.setText("0");
-
-        lbDiemCK.setText("0");
-
-        lbDiemKhac.setText("0");
-
-        lbDiemTong.setText("0");
-
-        cmbDiemSV.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
-
-        jLabel9.setText("MSSV");
-
-        lbMSSV.setText("0");
-
         jButton1.setText("Đổi mật khẩu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,33 +78,51 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
             }
         });
 
+        tblDiemSV.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDiemSV);
+
+        scrollPane1.add(jScrollPane1);
+
+        lbMSSV.setText("MSSV");
+
+        jLabel2.setText("MSSV");
+
+        jLabel3.setText("Họ Tên");
+
+        jLabel4.setText("Lớp");
+
+        lbHoTen.setText("Họ Tên");
+
+        lbLopHoc.setText("lớp");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmbDiemSV, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel9))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbDiemTong)
-                            .addComponent(lbDiemCK)
-                            .addComponent(lbDiemGK)
-                            .addComponent(lbDiemKhac)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbMSSV)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lbHoTen)
+                    .addComponent(lbMSSV, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbLopHoc, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,30 +130,19 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
+                    .addComponent(jButton1)
                     .addComponent(lbMSSV)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbDiemGK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDiemCK)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDiemKhac)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(lbDiemTong))
-                .addGap(18, 18, 18)
-                .addComponent(cmbDiemSV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lbHoTen))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbLopHoc)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -215,7 +201,97 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
         return  false;
     }
     
-    void  HienThiDanhSachLopLenCombobox()
+    int LayThongTin(String lophoc)
+    {
+        
+        try {
+               File file = new File("");
+        String currentDirectory = file.getAbsolutePath();
+          List<SinhVien> listSinhVien = new ArrayList<SinhVien>();
+        currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + lophoc+".txt";
+       
+           
+        String lopHoc = lophoc.trim();
+        
+      
+        
+         File ff = new File(currentDirectory);
+        if(!ff.exists())
+        {
+            return 1;
+        }
+        
+         Path pathToFile = Paths.get(currentDirectory);
+        try (BufferedReader br = Files.newBufferedReader(pathToFile,StandardCharsets.UTF_8)) 
+        {
+
+            // read the first line from the text file
+            String line = br.readLine(); 
+            int stt=1;
+            while (line != null) 
+            {
+             
+                String[] attributes = line.split("\\|");
+                
+                if(attributes[0].contains(DangNhap.user))
+                {
+                  
+                    lbHoTen.setText(attributes[1]);
+                    lbLopHoc.setText(lopHoc);
+                    
+                    lbMSSV.setText(DangNhap.user);
+                       return 1;
+                }
+              
+              
+
+                // read next line before looping
+                // if end of file reached, line would be null
+                line = br.readLine();
+            }
+            
+            
+            // loop until all lines are read
+            
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        } catch (Exception e) {
+        }
+        
+        return 0;
+    }
+    
+    void HienThongTinSinhVien()
+    {
+         // TODO add your handling code here:
+        File fileghi = new File("");
+        String currentDirectory = fileghi.getAbsolutePath();
+        currentDirectory +="\\Data\\Dulieu\\DanhSachSinhVien";
+        File dir = new File(currentDirectory);
+        File ff = new File(currentDirectory);
+              if(!ff.exists())
+              {
+                  return;
+              }
+        File[] txtFiles = dir.listFiles(new TxtFileNameFilter());
+        List<DiemSV> listDiemSV = new ArrayList<DiemSV>();
+        for (File txtFile : txtFiles) {
+             File f = new File(txtFile.getAbsolutePath());
+            
+            
+             if(LayThongTin(f.getName().toString().replace(".txt", ""))==1)
+             {                            
+                 break;
+             }
+             
+             
+            
+        }
+    }
+    
+    void  HienDanhSachDiem()
     {
        
          // TODO add your handling code here:
@@ -229,25 +305,74 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
                   return;
               }
         File[] txtFiles = dir.listFiles(new TxtFileNameFilter());
- 
+        List<DiemSV> listDiemSV = new ArrayList<DiemSV>();
         for (File txtFile : txtFiles) {
              File f = new File(txtFile.getAbsolutePath());
             
              if(KiemTraSinhVienCoDiemHayKhong(f.getPath()))
             {
-                cmbDiemSV.addItem(f.getName().toString().replace(".txt", ""));
+                String lophoc = f.getName().toString().replace(".txt", "");
+               DiemSV diemsv =   LoadDuLieuDiemSinhVien(lophoc);
+               listDiemSV.add(diemsv);
+           
             }
+             
+             if(listDiemSV.size()>0)
+             {
+                 LoadDuLieuDiemSinhVien(columnNames,listDiemSV);
+             }
+             else
+             {
+                  TableModel tablemodel = new DefaultTableModel(null, columnNames);
+                 tblDiemSV.setModel(tablemodel);
+             }
              
             
         }
     }
     
     
-    void LoadDuLieuDiemSinhVien(String lophoc)
+    
+    void LoadDuLieuDiemSinhVien(String[] columnNames,List<DiemSV> listDiemSV)
+    {
+        
+         
+        
+        
+        String[][] listDataDiemSinhVien = new String[listDiemSV.size()][6];
+        for(int i =0;i<listDiemSV.size();i++)
+        {
+              listDataDiemSinhVien[i][0] = (i+1) + "";           
+              listDataDiemSinhVien[i][1] =  listDiemSV.get(i).getMSSV();
+              listDataDiemSinhVien[i][2] =  listDiemSV.get(i).getDiemGK();
+              listDataDiemSinhVien[i][3] =  listDiemSV.get(i).getDiemCK();
+              listDataDiemSinhVien[i][4] =  listDiemSV.get(i).getDiemKhac();
+              double diemTong = (Double.parseDouble(listDiemSV.get(i).getDiemGK())+
+                      Double.parseDouble(listDiemSV.get(i).getDiemCK())
+                      +Double.parseDouble(listDiemSV.get(i).getDiemKhac()))/3.0; 
+              
+              
+          
+              double diemtongf =  diemTong*4;
+              diemTong =   Math.ceil(diemtongf) /4.0;
+              listDataDiemSinhVien[i][5] =  diemTong+"";
+        }
+        
+        
+        
+        TableModel tablemodel = new DefaultTableModel(listDataDiemSinhVien, columnNames);
+        tblDiemSV.setModel(tablemodel);
+        
+      
+    
+    }
+    
+    
+    DiemSV LoadDuLieuDiemSinhVien(String lophoc)
     {       
         if(lophoc==null)
         {
-            return;
+            return null;
         }
          File file = new File("");
         String currentDirectory = file.getAbsolutePath();
@@ -256,9 +381,10 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
         Path pathToFile = Paths.get(currentDirectory);
         String lopHoc ="";
         File ff = new File(currentDirectory);
+        DiemSV diemSV= new DiemSV();
               if(!ff.exists())
               {
-                  return;
+                  return null;
               }
         try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.UTF_8)) 
         {
@@ -297,37 +423,35 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
             ioe.printStackTrace();
           
         }
-        
+        String[] atrributes = lophoc.split("\\-");
         for(DiemSV sv :listDiemSinhVien)
         {
             if(sv.getMSSV().contains(DangNhap.user))
             {
-                lbDiemGK.setText(sv.getDiemGK());
-                lbMSSV.setText(sv.getMSSV());
-                lbDiemCK.setText(sv.getDiemCK());
-                lbDiemKhac.setText(sv.getDiemKhac());
-                lbDiemTong.setText(sv.getDiemT());
-                break;
+                diemSV.setMSSV(atrributes[1]);
+                diemSV.setDiemGK(sv.getDiemGK());            
+                diemSV.setDiemCK(sv.getDiemCK());
+                diemSV.setDiemKhac(sv.getDiemKhac());
+                diemSV.setDiemT(sv.getDiemT());
+                return diemSV;
             }
         }
         
-        
+        return null;
        
     
     }
     
+      
+    
+    
     
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
        this.setLocationRelativeTo(null);
-        HienThiDanhSachLopLenCombobox();
+        HienDanhSachDiem();
+        HienThongTinSinhVien();
         
-          if(cmbDiemSV.getItemCount()>0)
-        {
-             LoadDuLieuDiemSinhVien(cmbDiemSV.getSelectedItem().toString());
-        }      
-        
-        
-        
+               
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -379,17 +503,15 @@ public class FormDiemSinhVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cmbDiemSV;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JLabel lbDiemCK;
-    private javax.swing.JLabel lbDiemGK;
-    private javax.swing.JLabel lbDiemKhac;
-    private javax.swing.JLabel lbDiemTong;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbHoTen;
+    private javax.swing.JLabel lbLopHoc;
     private javax.swing.JLabel lbMSSV;
+    private java.awt.ScrollPane scrollPane1;
+    private javax.swing.JTable tblDiemSV;
     // End of variables declaration//GEN-END:variables
 }

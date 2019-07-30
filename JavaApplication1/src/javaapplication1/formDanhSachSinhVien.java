@@ -60,9 +60,9 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngGioiTinh = new javax.swing.ButtonGroup();
         btnInportCSV = new javax.swing.JButton();
         txtCMND = new javax.swing.JTextField();
-        txtGioiTinh = new javax.swing.JTextField();
         txtMSSV = new javax.swing.JTextField();
         txtHoTen = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -74,6 +74,8 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         scrollPane2 = new java.awt.ScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDanhSachSinhVien = new javax.swing.JTable();
+        rdbNam = new javax.swing.JRadioButton();
+        rdbNu = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Danh sách sinh viên");
@@ -134,6 +136,13 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
 
         scrollPane2.add(jScrollPane1);
 
+        btngGioiTinh.add(rdbNam);
+        rdbNam.setText("Nam");
+        rdbNam.setVerifyInputWhenFocusTarget(false);
+
+        btngGioiTinh.add(rdbNu);
+        rdbNu.setText("Nu");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +150,11 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnThem)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnThem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnInportCSV)
+                        .addGap(108, 108, 108))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -150,15 +163,19 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(115, 115, 115)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtCMND)
-                                .addComponent(txtGioiTinh)
-                                .addComponent(txtHoTen)
-                                .addComponent(txtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cmbDanhSachLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnInportCSV)
-                .addGap(108, 108, 108))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbDanhSachLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rdbNam))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(rdbNu)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtCMND)
+                                        .addComponent(txtHoTen)
+                                        .addComponent(txtMSSV, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(80, 214, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(scrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -174,12 +191,14 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(rdbNam)
+                                .addComponent(rdbNu)))
                         .addGap(18, 18, 18)
                         .addComponent(txtCMND, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5))
@@ -189,7 +208,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
                     .addComponent(cmbDanhSachLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnInportCSV))
                 .addGap(59, 59, 59)
-                .addComponent(scrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(scrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -298,7 +317,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
     Writer fw = new BufferedWriter(new OutputStreamWriter(
-     new FileOutputStream(currentDirectory), "UTF8"));
+     new FileOutputStream(currentDirectory,true), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     listSinhVien.forEach((element) -> {
@@ -337,7 +356,8 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\DuLieu\\DanhSachSinhVien\\" + lophoc+".txt";
         Path pathToFile = Paths.get(currentDirectory);
         String lopHoc ="";
-        
+         
+      
       
         
          File ff = new File(currentDirectory);
@@ -402,6 +422,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         TableModel tablemodel = new DefaultTableModel(null, columnNames);
         tbDanhSachSinhVien.setModel(tablemodel);
         this.setLocationRelativeTo(null);
+        rdbNam.setSelected(true);
         HienThiDanhSachLopLenCombobox();         
         if(cmbDanhSachLopHoc.getItemCount()>0)
         {
@@ -424,7 +445,11 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
        
         String lopHoc ="";
         
-      
+        if(txtCMND.getText().length()==0||txtMSSV.getText().length()==0||txtHoTen.getText().length()==0)
+        {
+             JOptionPane.showMessageDialog(null, "Dữ liệu không hợp lệ xin kiểm tra lại","Thông báo" , JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         
          File ff = new File(currentDirectory);
         if(!ff.exists())
@@ -472,7 +497,18 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
           
         }
         
-        SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),txtGioiTinh.getText(),txtCMND.getText());
+         
+         String gioiTinh="";
+         if(rdbNam.isSelected())
+         {
+             gioiTinh =rdbNam.getText();
+         }
+         else
+         {
+             gioiTinh = rdbNu.getText();
+         }
+        
+        SinhVien sv = new SinhVien(txtMSSV.getText(),txtHoTen.getText(),gioiTinh,txtCMND.getText());
         listSinhVien.add(sv);
               
               
@@ -509,7 +545,7 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
         currentDirectory +="\\Data\\TaiKhoan\\"+"TaiKhoan.txt";
      //Bước 1: Tạo đối tượng luồng và liên kết nguồn dữ liệu
      Writer fw = new BufferedWriter(new OutputStreamWriter(
-     new FileOutputStream(currentDirectory), "UTF8"));
+     new FileOutputStream(currentDirectory,true), "UTF8"));
      //Bước 2: Ghi dữ liệu
      
     
@@ -545,9 +581,19 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
 
     private void tbDanhSachSinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDanhSachSinhVienMouseClicked
         // TODO add your handling code here:
-         txtMSSV.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 1).toString());
+        txtMSSV.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 1).toString());
         txtHoTen.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 2).toString());
-        txtGioiTinh.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 3).toString());
+        
+        if(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 3).toString().contains("Nam"))
+        {
+            rdbNam.setSelected(true);
+        }
+        else
+        {
+             rdbNu.setSelected(true);
+        }
+        
+      
         txtCMND.setText(tbDanhSachSinhVien.getValueAt(tbDanhSachSinhVien.getSelectedRow(), 4).toString());
         
     }//GEN-LAST:event_tbDanhSachSinhVienMouseClicked
@@ -618,16 +664,18 @@ public class formDanhSachSinhVien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInportCSV;
     private javax.swing.JButton btnThem;
+    private javax.swing.ButtonGroup btngGioiTinh;
     private javax.swing.JComboBox<String> cmbDanhSachLopHoc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton rdbNam;
+    private javax.swing.JRadioButton rdbNu;
     private java.awt.ScrollPane scrollPane2;
     private javax.swing.JTable tbDanhSachSinhVien;
     private javax.swing.JTextField txtCMND;
-    private javax.swing.JTextField txtGioiTinh;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtMSSV;
     // End of variables declaration//GEN-END:variables

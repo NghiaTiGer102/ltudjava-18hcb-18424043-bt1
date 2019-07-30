@@ -35,7 +35,7 @@
                   <Component id="btnDanhSachSinhVien" alignment="1" max="32767" attributes="0"/>
                   <Component id="btnDanhSachThoiKhoaBieu" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
+              <EmptySpace pref="104" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnDanhSachDiem" alignment="1" min="-2" pref="188" max="-2" attributes="0"/>
                   <Component id="btnDanhSachMonHoc" alignment="1" min="-2" pref="188" max="-2" attributes="0"/>
@@ -47,19 +47,19 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDanhSachSinhVien" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
                   <Component id="btnDanhSachMonHoc" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDanhSachThoiKhoaBieu" alignment="3" min="-2" pref="92" max="-2" attributes="0"/>
                   <Component id="btnDanhSachDiem" alignment="3" min="-2" pref="92" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="btnDoiMatKhau" min="-2" pref="73" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +67,10 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnDanhSachSinhVien">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#x1ef3; sinh vi&#xea;n"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="13" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; sinh vi&#xea;n"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDanhSachSinhVienActionPerformed"/>
@@ -75,6 +78,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDanhSachMonHoc">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; l&#x1edb;p m&#xf4;n h&#x1ecd;c"/>
       </Properties>
       <Events>
@@ -83,6 +89,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDanhSachThoiKhoaBieu">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; th&#x1edd;i kh&#xf3;a bi&#x1ec3;u"/>
       </Properties>
       <Events>
@@ -91,6 +100,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDanhSachDiem">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; &#x111;i&#x1ec3;m"/>
       </Properties>
       <Events>
@@ -99,6 +111,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnDoiMatKhau">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="13" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i m&#x1ead;t kh&#x1ea9;u"/>
       </Properties>
       <Events>
