@@ -41,7 +41,7 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
     /**
      * Creates new form FormDanhSachDiemSinhVien
      */
-    String[] columnNames = { "STT", "MSSV","Họ tên", "Điểm GK","Điểm CK","Điểm khác","Điểm tổng" };
+    String[] columnNames = { "STT", "MSSV","Họ tên", "Điểm GK","Điểm CK","Điểm khác","Điểm tổng","Đậu/Rớt" };
     public FormDanhSachDiemSinhVien() {
         initComponents();
     }
@@ -382,7 +382,7 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
         }
         
         
-        String[][] listDataDiemSinhVien = new String[listDiemSinhVien.size()][7];
+        String[][] listDataDiemSinhVien = new String[listDiemSinhVien.size()][8];
         for(int i =0;i<listDiemSinhVien.size();i++)
         {
               listDataDiemSinhVien[i][0] = (i+1) + "";
@@ -407,6 +407,16 @@ public class FormDanhSachDiemSinhVien extends javax.swing.JFrame {
               double diemtongf =  diemTong*4;
               diemTong =   Math.ceil(diemtongf) /4.0;
               listDataDiemSinhVien[i][6] =  diemTong+"";
+              String KT="";
+              if(diemTong>=5)
+              {
+                  KT = "Đâu";
+              }
+              else
+                {
+                    KT = "Rớt";
+                }
+               listDataDiemSinhVien[i][7] =  KT+"";
         }
         
         
